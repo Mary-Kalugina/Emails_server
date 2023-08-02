@@ -1,4 +1,4 @@
-const { faker } = require('@faker-js/faker');
+const faker = require('faker');
 const express = require('express');
 const { Observable, interval } = require('rxjs');
 const { map, take } = require('rxjs/operators');
@@ -17,7 +17,7 @@ const generateMessage = () => ({
 
 // Generate an array of random messages
 const generateMessages = (count) =>
-  Array.from({ length: count }, generateMessage);
+  Array.from({ length: count }, () => generateMessage());
 
 // Simulate new messages arriving every 5 seconds
 const newMessage$ = interval(5000).pipe(
@@ -41,3 +41,4 @@ app.get('/messages/unread', (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
